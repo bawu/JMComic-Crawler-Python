@@ -335,7 +335,7 @@ class Test_DirRule(JmTestConfigurable):
         album = self.client.get_album_detail('438516')
         photo = album[0] if len(album) > 0 else None
         
-        if photo:
+        if photo is not None:
             result = DirRule.parse_f_string_rule(album, photo, '{Aid}_{Pname}')
             self.assertIn(album.album_id, result)
             self.assertIn(photo.name, result)
@@ -345,7 +345,7 @@ class Test_DirRule(JmTestConfigurable):
         album = self.client.get_album_detail('438516')
         photo = album[0] if len(album) > 0 else None
         
-        if photo:
+        if photo is not None:
             rule = DirRule('Bd_Aid_Pname', base_dir=workspace())
             save_dir = rule.decide_image_save_dir(album, photo)
             self.assertIsNotNone(save_dir)
@@ -364,7 +364,7 @@ class Test_DirRule(JmTestConfigurable):
         album = self.client.get_album_detail('438516')
         photo = album[0] if len(album) > 0 else None
         
-        if photo:
+        if photo is not None:
             filename = DirRule.apply_rule_to_filename(album, photo, 'Pname')
             self.assertEqual(filename, photo.name)
 
